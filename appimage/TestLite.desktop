@@ -2,7 +2,7 @@
 Name=@finalName@
 Comment=@description@
 Exec=@finalName@
-Icon=openosrs
+Icon=runelite
 Terminal=false
 Type=Application
 Categories=Game;

@@ -47,12 +47,12 @@ public class OpenOSRSSplashScreen extends JFrame
 
 	private OpenOSRSSplashScreen(String mode)
 	{
-		this.setTitle("OpenOSRS");
+		this.setTitle("TestLite");
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setSize(FRAME_SIZE);
 		this.setLayout(new BorderLayout());
 		this.setUndecorated(true);
-		this.setIconImage(ImageUtil.getResourceStreamFromClass(OpenOSRSSplashScreen.class, "openosrs.png"));
+		this.setIconImage(ImageUtil.getResourceStreamFromClass(OpenOSRSSplashScreen.class, "runelite.png"));
 
 		final JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());

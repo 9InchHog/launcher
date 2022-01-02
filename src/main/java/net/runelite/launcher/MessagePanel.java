@@ -53,7 +53,7 @@ class MessagePanel extends JPanel
 	private static final Dimension BAR_SIZE = new Dimension(PANEL_SIZE.width, 30);
 	private static final int MESSAGE_AREA_PADDING = 15;
 
-	private final JLabel titleLabel = new JLabel("Welcome to OpenOSRS");
+	private final JLabel titleLabel = new JLabel("Welcome to TestLite");
 	private final JLabel messageArea;
 	private final JLabel bootstrapChannel;
 	private final JLabel barLabel = new JLabel("Doing something important");
@@ -87,7 +87,7 @@ class MessagePanel extends JPanel
 		c.gridy++;
 
 		// alternate message action
-		messageArea = messageArea("Open-source client for Old School RuneScape with more functionality and fewer restrictions.");
+		messageArea = messageArea("Testing.");
 
 		scrollPane = new JScrollPane(messageArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
@@ -113,10 +113,10 @@ class MessagePanel extends JPanel
 		buttonPanel.setBackground(ColorScheme.DARKER_GRAY_COLOR);
 		buttonPanel.setOpaque(true);
 
-		stableBtn = addButton("Stable", "The Stable option isn't the most up-to-date build, it will use the most stable OpenOSRS build.");
+		stableBtn = addButton("Stable", "The Stable option isn't the most up-to-date build, it will use the most stable TestLite build.");
 		buttonPanel.add(stableBtn);
 
-		nightlyBtn = addButton("Nightly", "The Nightly option is the most up-to-date build, it will use the latest OpenOSRS build which is built each night.");
+		nightlyBtn = addButton("Nightly", "The Nightly option is the most up-to-date build, it will use the latest TestLite build which is built each night.");
 		buttonPanel.add(nightlyBtn);
 
 		bootstrapChannel.setVisible(false);
@@ -136,8 +136,8 @@ class MessagePanel extends JPanel
 		this.add(barLabel, c);
 		c.gridy++;
 
-		bar.setBackground(ColorScheme.BRAND_BLUE_TRANSPARENT.darker());
-		bar.setForeground(ColorScheme.BRAND_BLUE);
+		bar.setBackground(ColorScheme.BRAND_SPOON_TRANSPARENT.darker());
+		bar.setForeground(ColorScheme.BRAND_SPOON);
 		bar.setMinimumSize(BAR_SIZE);
 		bar.setMaximumSize(BAR_SIZE);
 		bar.setBorder(new MatteBorder(0, 0, 0, 0, Color.LIGHT_GRAY));

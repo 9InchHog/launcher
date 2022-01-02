@@ -11,7 +11,7 @@ project.properties
 dependency-reduced-pom.xml
 *.exe
 *.tar.gz
-packr.jar
+packr*.jar
 native-linux/
 native-osx/
 native-win32/

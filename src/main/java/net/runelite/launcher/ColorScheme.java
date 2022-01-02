@@ -32,11 +32,26 @@ import java.awt.Color;
 class ColorScheme
 {
 	/* The blue color used for the branding's accents */
-	static final Color BRAND_BLUE = new Color(25, 194, 255);
-
+	//public static final Color BRAND_BLUE = new Color(25, 194, 255);
 	/* The blue color used for the branding's accents, with lowered opacity */
-	static final Color BRAND_BLUE_TRANSPARENT = new Color(25, 194, 255, 120);
+	//public static final Color BRAND_BLUE_TRANSPARENT = new Color(25, 194, 255, 120);
 
+	/* The green color used for the branding's accents */
+	public static final Color BRAND_SPOON = new Color(37, 197, 79);
+	/* The green color used for the branding's accents, with lowered opacity */
+	public static final Color BRAND_SPOON_TRANSPARENT = new Color(37, 197, 79, 120);
+	/* The green color used for the branding's accents */
+	public static final Color RUNELITE_ORANGE = new Color(220, 138, 0);
+	/* The green color used for the branding's accents, with lowered opacity */
+	public static final Color RUNELITE_ORANGE_TRANSPARENT = new Color(220, 138, 0, 120);
+
+	public static final Color BRAND_BLUE = RUNELITE_ORANGE;
+	/* The orange color used for the branding's accents */
+	public static final Color BRAND_ORANGE = RUNELITE_ORANGE;
+
+	/* The orange color used for the branding's accents, with lowered opacity */
+	//public static final Color BRAND_BLUE_TRANSPARENT = BRAND_SPOON_TRANSPARENT;
+	public static final Color BRAND_BLUE_TRANSPARENT = RUNELITE_ORANGE_TRANSPARENT;
 
 	static final Color DARK_GRAY_COLOR = new Color(40, 40, 40);
 	static final Color DARKER_GRAY_COLOR = new Color(30, 30, 30);

@@ -44,13 +44,13 @@ java -jar packr_${PACKR_VERSION}.jar \
     --platform \
     mac \
     --icon \
-    packr/openosrs.icns \
+    packr/runelite.icns \
     --jdk \
     osx-jdk \
     --executable \
-    OpenOSRS \
+    TestLite \
     --classpath \
-    build/libs/OpenOSRS-shaded.jar \
+    build/libs/TestLite-shaded.jar \
     --mainclass \
     net.runelite.launcher.Launcher \
     --vmargs \
@@ -60,21 +60,21 @@ java -jar packr_${PACKR_VERSION}.jar \
     XX:CompileThreshold=1500 \
     Djna.nosys=true \
     --output \
-    native-osx/OpenOSRS.app
+    native-osx/TestLite.app
 
-cp build/filtered-resources/Info.plist native-osx/OpenOSRS.app/Contents
+cp build/filtered-resources/Info.plist native-osx/TestLite.app/Contents
 
-echo Setting world execute permissions on OpenOSRS
-pushd native-osx/OpenOSRS.app
-chmod g+x,o+x Contents/MacOS/OpenOSRS
+echo Setting world execute permissions on TestLite
+pushd native-osx/TestLite.app
+chmod g+x,o+x Contents/MacOS/TestLite
 popd
 
-codesign -f -s "${SIGNING_IDENTITY}" --entitlements osx/signing.entitlements --options runtime native-osx/RuneLite.app || true
+codesign -f -s "${SIGNING_IDENTITY}" --entitlements osx/signing.entitlements --options runtime native-osx/TestLite.app || true
 
 # create-dmg exits with an error code due to no code signing, but is still okay
 # note we use Adam-/create-dmg as upstream does not support UDBZ
-create-dmg --format UDBZ native-osx/OpenOSRS.app.app native-osx/ || true
+create-dmg --format UDBZ native-osx/TestLite.app native-osx/ || true
 
-mv native-osx/OpenOSRS\ *.dmg native-osx/OpenOSRS.dmg
+mv native-osx/TestLite\ *.dmg native-osx/TestLite.dmg
 
-xcrun altool --notarize-app --username "${ALTOOL_USER}" --password "${ALTOOL_PASS}" --primary-bundle-id openosrs --file native-osx/OpenOSRS.dmg || true
+xcrun altool --notarize-app --username "${ALTOOL_USER}" --password "${ALTOOL_PASS}" --primary-bundle-id TestLite --file native-osx/TestLite.dmg || true

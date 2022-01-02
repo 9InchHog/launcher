@@ -1,10 +1,10 @@
 [Setup]
-AppName=OpenOSRS Launcher
-AppPublisher=OpenOSRS
-UninstallDisplayName=OpenOSRS
+AppName=TestLite Launcher
+AppPublisher=TestLite
+UninstallDisplayName=TestLite
 AppVersion=@project.version@
-AppSupportURL=https://openosrs.com/
-DefaultDirName={localappdata}\OpenOSRS
+AppSupportURL=https://discordapp.com/invite/ChMubPP
+DefaultDirName={localappdata}\TestLite
 ; vcredist queues files to be replaced at next reboot, however it doesn't seem to matter
 RestartIfNeededByRun=no
 
@@ -13,34 +13,34 @@ ExtraDiskSpaceRequired=30000000
 ArchitecturesAllowed=x86 x64
 PrivilegesRequired=lowest
 
-WizardSmallImageFile=@basedir@/innosetup/openosrs_small.bmp
-SetupIconFile=@basedir@/openosrs.ico
-UninstallDisplayIcon={app}\OpenOSRS.exe
+WizardSmallImageFile=@basedir@/innosetup/TestLite.bmp
+SetupIconFile=@basedir@/TestLite.ico
+UninstallDisplayIcon={app}\TestLite.exe
 
 Compression=lzma2
 SolidCompression=yes
 
-OutputDir=@basedir@
-OutputBaseFilename=OpenOSRSSetup32
+OutputDir=@basedir@/release
+OutputBaseFilename=TestLiteSetup32
 
 [Tasks]
 Name: DesktopIcon; Description: "Create a &desktop icon";
 
 [Files]
-Source: "@basedir@\native-win32\OpenOSRS.exe"; DestDir: "{app}"
-Source: "@basedir@\native-win32\OpenOSRS-shaded.jar"; DestDir: "{app}"
+Source: "@basedir@\native-win32\TestLite.exe"; DestDir: "{app}"
+Source: "@basedir@\native-win32\TestLite-shaded.jar"; DestDir: "{app}"
 Source: "@basedir@\native-win32\config.json"; DestDir: "{app}"
 Source: "@basedir@\native-win32\jre\*"; DestDir: "{app}\jre"; Flags: recursesubdirs
 Source: "@basedir@\vcredist_x86.exe"; DestDir: {tmp}; Flags: deleteafterinstall
 
 [Icons]
 ; start menu
-Name: "{userprograms}\OpenOSRS"; Filename: "{app}\OpenOSRS.exe"
-Name: "{userdesktop}\OpenOSRS"; Filename: "{app}\OpenOSRS.exe"; Tasks: DesktopIcon
+Name: "{userprograms}\TestLite"; Filename: "{app}\TestLite.exe"
+Name: "{userdesktop}\TestLite"; Filename: "{app}\TestLite.exe"; Tasks: DesktopIcon
 
 [Run]
 Filename: "{tmp}\vcredist_x86.exe"; Check: VCRedistNeedsInstall; Parameters: "/install /quiet /norestart"; StatusMsg: "Installing VC++ 2013 (x86) Redistributables..."
-Filename: "{app}\OpenOSRS.exe"; Description: "&Open OpenOSRS"; Flags: postinstall skipifsilent nowait
+Filename: "{app}\TestLite.exe"; Description: "&Open TestLite"; Flags: postinstall skipifsilent nowait
 
 [InstallDelete]
 ; Delete the old jvm so it doesn't try to load old stuff with the new vm and crash

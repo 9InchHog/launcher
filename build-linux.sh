@@ -7,9 +7,9 @@ JDK_BUILD="11"
 PACKR_VERSION="runelite-1.0"
 
 # Check if there's a client jar file - If there's no file the AppImage will not work but will still be built.
-if ! [ -e build/libs/OpenOSRS-shaded.jar ]
+if ! [ -e build/libs/TestLite-shaded.jar ]
 then
-  echo "build/libs/OpenOSRS-shaded.jar not found, exiting"
+  echo "build/libs/TestLite-shaded.jar not found, exiting"
   exit 1
 fi
 
@@ -44,9 +44,9 @@ java -jar packr_${PACKR_VERSION}.jar \
     --jdk \
     linux-jdk \
     --executable \
-    OpenOSRS \
+    TestLite \
     --classpath \
-    build/libs/OpenOSRS-shaded.jar \
+    build/libs/TestLite-shaded.jar \
     --mainclass \
     net.runelite.launcher.Launcher \
     --vmargs \
@@ -56,24 +56,24 @@ java -jar packr_${PACKR_VERSION}.jar \
     XX:CompileThreshold=1500 \
     Djna.nosys=true \
     --output \
-    native-linux/OpenOSRS.AppDir/ \
+    native-linux/TestLite.AppDir/ \
     --resources \
-    build/filtered-resources/openosrs.desktop \
-    appimage/openosrs.png
+    build/filtered-resources/TestLite.desktop \
+    appimage/runelite.png
 
-pushd native-linux/OpenOSRS.AppDir
+pushd native-linux/TestLite.AppDir
 mkdir -p jre/lib/amd64/server/
 ln -s ../../server/libjvm.so jre/lib/amd64/server/ # packr looks for libjvm at this hardcoded path
 popd
 
 # Symlink AppRun -> RuneLite
-pushd native-linux/OpenOSRS.AppDir/
-ln -s OpenOSRS AppRun
+pushd native-linux/TestLite.AppDir/
+ln -s TestLite AppRun
 popd
 
 curl -Lo appimagetool-x86_64.AppImage https://github.com/AppImage/AppImageKit/releases/download/12/appimagetool-x86_64.AppImage
 chmod 755 appimagetool-x86_64.AppImage
 
 ./appimagetool-x86_64.AppImage \
-	native-linux/OpenOSRS.AppDir/ \
-	native-linux/OpenOSRS.AppImage
+	native-linux/TestLite.AppDir/ \
+	release/TestLite.AppImage

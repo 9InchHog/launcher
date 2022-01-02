@@ -1,6 +1,6 @@
-name: openosrs
+name: TestLite
 base: core18
-title: OpenOSRS
+title: TestLite
 version: git
 summary: Open-source OSRS client with more functionality and less restrictions
 description: |
@@ -9,7 +9,7 @@ description: |
 type: app
 grade: stable
 confinement: strict
-icon: snap/gui/openosrs.png
+icon: snap/gui/runelite.png
 license: BSD-2-Clause
 
 parts:
@@ -21,7 +21,7 @@ parts:
       - libxrender1
       - libxtst6
 
-  openosrs:
+  TestLite:
     plugin: dump
     source-type: local
     source: build/libs/
@@ -32,8 +32,8 @@ parts:
       - libasound2-plugins
     override-pull: |
       snapcraftctl pull
-      find . -not -name 'OpenOSRS-shaded.jar' -delete
-      if [ ! -f OpenOSRS-shaded.jar ]
+      find . -not -name 'TestLite-shaded.jar' -delete
+      if [ ! -f TestLite-shaded.jar ]
       then
         echo "Run gradle prior to running snapcraft!"
         exit 1
@@ -68,8 +68,8 @@ layout:
     bind: $SNAP/gnome-platform/usr/share/xml/iso-codes
 
 apps:
-  openosrs:
-    command: bin/java -jar $SNAP/OpenOSRS-shaded.jar
+  TestLite:
+    command: bin/java -jar $SNAP/TestLite-shaded.jar
     plugs:
       - desktop
       - desktop-legacy

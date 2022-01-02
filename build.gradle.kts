@@ -1,5 +1,5 @@
 /*
-version = '2.2.0'
+version = '2.2.3'
 */
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import org.apache.tools.ant.filters.ReplaceTokens
@@ -83,11 +83,11 @@ tasks {
     processResources {
         val tokens = mapOf(
                 "basedir"         to project.projectDir.path,
-                "finalName"       to "OpenOSRS",
+                "finalName"       to "TestLite",
                 "artifact"        to "launcher",
                 "project.version" to project.version,
                 "project.group"   to project.group,
-                "description"     to "OpenOSRS launcher"
+                "description"     to "TestLite launcher"
         )
 
         copy {
@@ -99,7 +99,7 @@ tasks {
                 include("openosrs32.iss")
             }
             from("${rootDir}/appimage") {
-                include("openosrs.desktop")
+                include("TestLite.desktop")
             }
             into("${buildDir}/filtered-resources/")
 
@@ -127,7 +127,7 @@ tasks {
     }
 
     shadowJar {
-        archiveName = "OpenOSRS-shaded.jar"
+        archiveName = "TestLite-shaded.jar"
         exclude("net/runelite/injector/**")
     }
 
