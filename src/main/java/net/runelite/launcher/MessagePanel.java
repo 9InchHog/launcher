@@ -113,10 +113,10 @@ class MessagePanel extends JPanel
 		buttonPanel.setBackground(ColorScheme.DARKER_GRAY_COLOR);
 		buttonPanel.setOpaque(true);
 
-		stableBtn = addButton("Stable", "The Stable option isn't the most up-to-date build, it will use the most stable TestLite build.");
+		stableBtn = addButton("Stable", "The Stable option isn't the most up-to-date build, it will use the most stable SpoonLite build.");
 		buttonPanel.add(stableBtn);
 
-		nightlyBtn = addButton("Nightly", "The Nightly option is the most up-to-date build, it will use the latest TestLite build which is built each night.");
+		nightlyBtn = addButton("Nightly", "The Nightly option is the most up-to-date build, it will use the latest SpoonLite build which is built each night.");
 		buttonPanel.add(nightlyBtn);
 
 		bootstrapChannel.setVisible(false);

@@ -47,7 +47,7 @@ public class OpenOSRSSplashScreen extends JFrame
 
 	private OpenOSRSSplashScreen(String mode)
 	{
-		this.setTitle("TestLite");
+		this.setTitle("SpoonLite");
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setSize(FRAME_SIZE);
 		this.setLayout(new BorderLayout());

@@ -48,9 +48,9 @@ java -jar packr_${PACKR_VERSION}.jar \
     --jdk \
     osx-jdk \
     --executable \
-    TestLite \
+    SpoonLite \
     --classpath \
-    build/libs/TestLite-shaded.jar \
+    build/libs/SpoonLite-shaded.jar \
     --mainclass \
     net.runelite.launcher.Launcher \
     --vmargs \
@@ -60,21 +60,21 @@ java -jar packr_${PACKR_VERSION}.jar \
     XX:CompileThreshold=1500 \
     Djna.nosys=true \
     --output \
-    native-osx/TestLite.app
+    native-osx/SpoonLite.app
 
-cp build/filtered-resources/Info.plist native-osx/TestLite.app/Contents
+cp build/filtered-resources/Info.plist native-osx/SpoonLite.app/Contents
 
-echo Setting world execute permissions on TestLite
-pushd native-osx/TestLite.app
-chmod g+x,o+x Contents/MacOS/TestLite
+echo Setting world execute permissions on SpoonLite
+pushd native-osx/SpoonLite.app
+chmod g+x,o+x Contents/MacOS/SpoonLite
 popd
 
-codesign -f -s "${SIGNING_IDENTITY}" --entitlements osx/signing.entitlements --options runtime native-osx/TestLite.app || true
+codesign -f -s "${SIGNING_IDENTITY}" --entitlements osx/signing.entitlements --options runtime native-osx/SpoonLite.app || true
 
 # create-dmg exits with an error code due to no code signing, but is still okay
 # note we use Adam-/create-dmg as upstream does not support UDBZ
-create-dmg --format UDBZ native-osx/TestLite.app native-osx/ || true
+create-dmg --format UDBZ native-osx/SpoonLite.app native-osx/ || true
 
-mv native-osx/TestLite\ *.dmg native-osx/TestLite.dmg
+mv native-osx/SpoonLite\ *.dmg native-osx/SpoonLite.dmg
 
-xcrun altool --notarize-app --username "${ALTOOL_USER}" --password "${ALTOOL_PASS}" --primary-bundle-id TestLite --file native-osx/TestLite.dmg || true
+xcrun altool --notarize-app --username "${ALTOOL_USER}" --password "${ALTOOL_PASS}" --primary-bundle-id SpoonLite --file native-osx/SpoonLite.dmg || true

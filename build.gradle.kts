@@ -83,11 +83,11 @@ tasks {
     processResources {
         val tokens = mapOf(
                 "basedir"         to project.projectDir.path,
-                "finalName"       to "TestLite",
+                "finalName"       to "SpoonLite",
                 "artifact"        to "launcher",
                 "project.version" to project.version,
                 "project.group"   to project.group,
-                "description"     to "TestLite launcher"
+                "description"     to "SpoonLite launcher"
         )
 
         copy {
@@ -99,7 +99,7 @@ tasks {
                 include("openosrs32.iss")
             }
             from("${rootDir}/appimage") {
-                include("TestLite.desktop")
+                include("SpoonLite.desktop")
             }
             into("${buildDir}/filtered-resources/")
 
@@ -127,7 +127,7 @@ tasks {
     }
 
     shadowJar {
-        archiveName = "TestLite-shaded.jar"
+        archiveName = "SpoonLite-shaded.jar"
         exclude("net/runelite/injector/**")
     }
 

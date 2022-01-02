@@ -1,10 +1,10 @@
 [Setup]
-AppName=TestLite Launcher
-AppPublisher=TestLite
-UninstallDisplayName=TestLite
+AppName=SpoonLite Launcher
+AppPublisher=SpoonLite
+UninstallDisplayName=SpoonLite
 AppVersion=@project.version@
-AppSupportURL=https://discordapp.com/invite/ChMubPP
-DefaultDirName={localappdata}\TestLite
+AppSupportURL=https://discord.gg/mZvA6My
+DefaultDirName={localappdata}\SpoonLite
 ; vcredist queues files to be replaced at next reboot, however it doesn't seem to matter
 RestartIfNeededByRun=no
 
@@ -13,34 +13,34 @@ ExtraDiskSpaceRequired=30000000
 ArchitecturesAllowed=x64
 PrivilegesRequired=lowest
 
-WizardSmallImageFile=@basedir@/innosetup/TestLite.bmp
-SetupIconFile=@basedir@/TestLite.ico
-UninstallDisplayIcon={app}\TestLite.exe
+WizardSmallImageFile=@basedir@/innosetup/SpoonLite.bmp
+SetupIconFile=@basedir@/SpoonLite.ico
+UninstallDisplayIcon={app}\SpoonLite.exe
 
 Compression=lzma2
 SolidCompression=yes
 
 OutputDir=@basedir@/release
-OutputBaseFilename=TestLiteSetup
+OutputBaseFilename=SpoonLiteSetup
 
 [Tasks]
 Name: DesktopIcon; Description: "Create a &desktop icon";
 
 [Files]
-Source: "@basedir@\native-win64\TestLite.exe"; DestDir: "{app}"
-Source: "@basedir@\native-win64\TestLite-shaded.jar"; DestDir: "{app}"
+Source: "@basedir@\native-win64\SpoonLite.exe"; DestDir: "{app}"
+Source: "@basedir@\native-win64\SpoonLite-shaded.jar"; DestDir: "{app}"
 Source: "@basedir@\native-win64\config.json"; DestDir: "{app}"
 Source: "@basedir@\native-win64\jre\*"; DestDir: "{app}\jre"; Flags: recursesubdirs
 Source: "@basedir@\vcredist_x64.exe"; DestDir: {tmp}; Flags: deleteafterinstall
 
 [Icons]
 ; start menu
-Name: "{userprograms}\TestLite"; Filename: "{app}\TestLite.exe"
-Name: "{userdesktop}\TestLite"; Filename: "{app}\TestLite.exe"; Tasks: DesktopIcon
+Name: "{userprograms}\SpoonLite"; Filename: "{app}\SpoonLite.exe"
+Name: "{userdesktop}\SpoonLite"; Filename: "{app}\SpoonLite.exe"; Tasks: DesktopIcon
 
 [Run]
 Filename: "{tmp}\vcredist_x64.exe"; Check: VCRedistNeedsInstall; Parameters: "/install /quiet /norestart"; StatusMsg: "Installing VC++ 2015 (x64) Redistributables..."
-Filename: "{app}\TestLite.exe"; Description: "&Open TestLite"; Flags: postinstall skipifsilent nowait
+Filename: "{app}\SpoonLite.exe"; Description: "&Open SpoonLite"; Flags: postinstall skipifsilent nowait
 
 [InstallDelete]
 ; Delete the old jvm so it doesn't try to load old stuff with the new vm and crash

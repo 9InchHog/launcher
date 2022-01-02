@@ -1,7 +1,7 @@
 [Desktop Entry]
-Name=TestLite
+Name=SpoonLite
 Comment=Open-source OldSchool RuneScape client with more functionality and less restrictions
-Exec=TestLite
+Exec=SpoonLite
 Icon=${SNAP}/meta/gui/runelite.png
 Type=Application
 Categories=Game;

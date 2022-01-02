@@ -127,7 +127,7 @@ class InfoPanel extends JPanel
 		this.add(logsFolder, c);
 		c.gridy++;
 
-		final JLabel discord = createPanelButton("Get help on Discord", "Instant invite link to join the TestLite discord", () -> LinkBrowser.browse(DISCORD_INVITE_LINK));
+		final JLabel discord = createPanelButton("Get help on Discord", "Instant invite link to join the SpoonLite discord", () -> LinkBrowser.browse(DISCORD_INVITE_LINK));
 		this.add(discord, c);
 		c.gridy++;
 

@@ -7,9 +7,9 @@ JDK_BUILD="11"
 PACKR_VERSION="runelite-1.0"
 
 # Check if there's a client jar file - If there's no file the AppImage will not work but will still be built.
-if ! [ -e build/libs/TestLite-shaded.jar ]
+if ! [ -e build/libs/SpoonLite-shaded.jar ]
 then
-  echo "build/libs/TestLite-shaded.jar not found, exiting"
+  echo "build/libs/SpoonLite-shaded.jar not found, exiting"
   exit 1
 fi
 
@@ -44,9 +44,9 @@ java -jar packr_${PACKR_VERSION}.jar \
     --jdk \
     linux-jdk \
     --executable \
-    TestLite \
+    SpoonLite \
     --classpath \
-    build/libs/TestLite-shaded.jar \
+    build/libs/SpoonLite-shaded.jar \
     --mainclass \
     net.runelite.launcher.Launcher \
     --vmargs \
@@ -56,24 +56,24 @@ java -jar packr_${PACKR_VERSION}.jar \
     XX:CompileThreshold=1500 \
     Djna.nosys=true \
     --output \
-    native-linux/TestLite.AppDir/ \
+    native-linux/SpoonLite.AppDir/ \
     --resources \
-    build/filtered-resources/TestLite.desktop \
+    build/filtered-resources/SpoonLite.desktop \
     appimage/runelite.png
 
-pushd native-linux/TestLite.AppDir
+pushd native-linux/SpoonLite.AppDir
 mkdir -p jre/lib/amd64/server/
 ln -s ../../server/libjvm.so jre/lib/amd64/server/ # packr looks for libjvm at this hardcoded path
 popd
 
 # Symlink AppRun -> RuneLite
-pushd native-linux/TestLite.AppDir/
-ln -s TestLite AppRun
+pushd native-linux/SpoonLite.AppDir/
+ln -s SpoonLite AppRun
 popd
 
 curl -Lo appimagetool-x86_64.AppImage https://github.com/AppImage/AppImageKit/releases/download/12/appimagetool-x86_64.AppImage
 chmod 755 appimagetool-x86_64.AppImage
 
 ./appimagetool-x86_64.AppImage \
-	native-linux/TestLite.AppDir/ \
-	release/TestLite.AppImage
+	native-linux/SpoonLite.AppDir/ \
+	release/SpoonLite.AppImage
