@@ -53,7 +53,7 @@ class MessagePanel extends JPanel
 	private static final Dimension BAR_SIZE = new Dimension(PANEL_SIZE.width, 30);
 	private static final int MESSAGE_AREA_PADDING = 15;
 
-	private final JLabel titleLabel = new JLabel("Welcome to TestLite");
+	private final JLabel titleLabel = new JLabel("Welcome to SpoonLite");
 	private final JLabel messageArea;
 	private final JLabel bootstrapChannel;
 	private final JLabel barLabel = new JLabel("Doing something important");
@@ -161,7 +161,12 @@ class MessagePanel extends JPanel
 
 	private JLabel messageArea(String message)
 	{
-		JLabel messageArea = new JLabel("<html><div style='text-align:center;'>" + message + "</div></html>")
+		JLabel messageArea = new JLabel("<html><div style='text-align:center;'>Holy fucking shit. I want to grill so goddamn bad. I can't stand it anymore. Every time I go to my yard I get a massive spatula." +
+				" I've seen every charcoal review post there is online. My dreams are nothing but constant fucking grilling with My grill. " +
+				"I'm sick of waking up every morning with six hotdogs in my boxers and knowing that those are hotdogs that should've been grilled inside of my grill. " +
+				"I want it to have burgers/hotdogs.\n" + "\n" + "Fuck, my fucking mom caught me with the neighbors grill. " +
+				"I'd used my own propane and went to fucking town. She hasn't said a word to me in 10 hours and I'm worried she's gonna take away my grill. " +
+				"I might not ever get to see my grill again..</div></html>")
 		{
 			@Override
 			public Dimension getPreferredSize()

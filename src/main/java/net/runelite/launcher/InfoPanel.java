@@ -59,7 +59,8 @@ class InfoPanel extends JPanel
 {
 	private static final Color DARK_GREY = new Color(10, 10, 10, 255);
 
-	private static final BufferedImage TRANSPARENT_LOGO = ImageUtil.getResourceStreamFromClass(InfoPanel.class, "openosrs.png");
+	//private static final BufferedImage TRANSPARENT_LOGO = ImageUtil.getResourceStreamFromClass(InfoPanel.class, "openosrs.png");
+	private static final BufferedImage TRANSPARENT_LOGO = ImageUtil.getResourceStreamFromClass(InfoPanel.class, "fuckmygrill.png");
 	static final Dimension PANEL_SIZE = new Dimension(200, OpenOSRSSplashScreen.FRAME_SIZE.height);
 	private static final File RUNELITE_DIR = new File(System.getProperty("user.home"), ".runelite");
 	private static final File LOGS_DIR = new File(RUNELITE_DIR, "logs");
@@ -87,7 +88,8 @@ class InfoPanel extends JPanel
 		final ImageIcon transparentLogo = new ImageIcon();
 		if (TRANSPARENT_LOGO != null)
 		{
-			transparentLogo.setImage(TRANSPARENT_LOGO.getScaledInstance(128, 128, Image.SCALE_SMOOTH));
+			//transparentLogo.setImage(TRANSPARENT_LOGO.getScaledInstance(128, 128, Image.SCALE_SMOOTH)); //RuneLite logo
+			transparentLogo.setImage(TRANSPARENT_LOGO.getScaledInstance(224, 224, Image.SCALE_SMOOTH)); //Grill
 		}
 		final JLabel logo = new JLabel(transparentLogo);
 
@@ -177,7 +179,7 @@ class InfoPanel extends JPanel
 		final JLabel textButton = new JLabel(title);
 		textButton.setFont(FontManager.getRunescapeSmallFont());
 		textButton.setHorizontalAlignment(JLabel.CENTER);
-		textButton.setForeground(ColorScheme.BRAND_BLUE);
+		textButton.setForeground(ColorScheme.BRAND_SPOON);
 		textButton.setBackground(null);
 		textButton.setPreferredSize(VERSION_SIZE);
 		textButton.setMinimumSize(VERSION_SIZE);
