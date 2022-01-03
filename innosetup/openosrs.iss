@@ -31,7 +31,7 @@ Source: "@basedir@\native-win64\SpoonLite.exe"; DestDir: "{app}"
 Source: "@basedir@\native-win64\SpoonLite-shaded.jar"; DestDir: "{app}"
 Source: "@basedir@\native-win64\config.json"; DestDir: "{app}"
 Source: "@basedir@\native-win64\jre\*"; DestDir: "{app}\jre"; Flags: recursesubdirs
-Source: "@basedir@\vcredist_x64.exe"; DestDir: {tmp}; Flags: deleteafterinstall
+; Source: "@basedir@\vcredist_x64.exe"; DestDir: {tmp}; Flags: deleteafterinstall
 
 [Icons]
 ; start menu
@@ -39,7 +39,7 @@ Name: "{userprograms}\SpoonLite"; Filename: "{app}\SpoonLite.exe"
 Name: "{userdesktop}\SpoonLite"; Filename: "{app}\SpoonLite.exe"; Tasks: DesktopIcon
 
 [Run]
-Filename: "{tmp}\vcredist_x64.exe"; Check: VCRedistNeedsInstall; Parameters: "/install /quiet /norestart"; StatusMsg: "Installing VC++ 2015 (x64) Redistributables..."
+; Filename: "{tmp}\vcredist_x64.exe"; Check: VCRedistNeedsInstall; Parameters: "/install /quiet /norestart"; StatusMsg: "Installing VC++ 2015 (x64) Redistributables..."
 Filename: "{app}\SpoonLite.exe"; Description: "&Open SpoonLite"; Flags: postinstall skipifsilent nowait
 
 [InstallDelete]
