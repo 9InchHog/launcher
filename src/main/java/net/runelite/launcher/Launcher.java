@@ -278,8 +278,8 @@ public class Launcher
 			}
 			if (jvmTooOld)
 			{
-				OpenOSRSSplashScreen.setError("Your Java installation is too old", "OpenOSRS now requires Java " +
-					bootstrap.getRequiredJVMVersion() + " to run. You can get a platform specific version from openosrs.com," +
+				OpenOSRSSplashScreen.setError("Your Java installation is too old", "RuneLite now requires Java " +
+					bootstrap.getRequiredJVMVersion() + " to run. You can get a platform specific version from the SpoonLite discord," +
 					" or install a newer version of Java.");
 				return;
 			}
@@ -287,7 +287,8 @@ public class Launcher
 			if (!checkVersion(bootstrap))
 			{
 				log.error("launcher version too low");
-				OpenOSRSSplashScreen.setError("Your launcher is outdated!", "The launcher you're using is oudated. Please either download a newer version from openosrs.com or by clicking the update button on the right hand side.");
+				OpenOSRSSplashScreen.setError("Your launcher is outdated!", "The launcher you're using is oudated. " +
+						"Please either download a newer version from the SpoonLite discord or by clicking the update button on the right hand side.");
 				return;
 			}
 
@@ -369,14 +370,14 @@ public class Launcher
 		catch (Exception e)
 		{
 			log.error("Failure during startup", e);
-			OpenOSRSSplashScreen.setError("OpenOSRS has encountered an unexpected error during startup!", "You have encountered an issue, please check your log files for a more detailed error message.");
+			OpenOSRSSplashScreen.setError("RuneLite has encountered an unexpected error during startup!", "You have encountered an issue, please check your log files for a more detailed error message.");
 
 		}
 		catch (Error e)
 		{
 			// packr seems to eat exceptions thrown out of main, so at least try to log it
 			log.error("Failure during startup", e);
-			OpenOSRSSplashScreen.setError("OpenOSRS has encountered an unexpected error during startup!", "You have encountered an issue, please check your log files for a more detailed error message.");
+			OpenOSRSSplashScreen.setError("RuneLite has encountered an unexpected error during startup!", "You have encountered an issue, please check your log files for a more detailed error message.");
 
 			throw e;
 		}
