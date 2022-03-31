@@ -135,7 +135,7 @@ class InfoPanel extends JPanel
 		this.add(troubleshooting, c);
 		c.gridy++;
 
-		final JLabel exit = createPanelButton("Exit", "Closes the application immediately", () -> System.exit(0));
+		final JLabel exit = createPanelButton("Exit", "Closes the application immediately!", () -> System.exit(0));
 		this.add(exit, c);
 		c.gridy++;
 	}
