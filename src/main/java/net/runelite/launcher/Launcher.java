@@ -73,13 +73,11 @@ public class Launcher
 	private static final File REPO_DIR = new File(RUNELITE_DIR, "spoon-repo");
 	private static final File CRASH_FILES = new File(LOGS_DIR, "jvm_crash_pid_%p.log");
 	static final String LAUNCHER_BUILD = "https://raw.githubusercontent.com/9InchHog/launcher/master/build.gradle.kts";
-	private static final String CLIENT_BOOTSTRAP_STAGING_URL = "https://raw.githubusercontent.com/9InchHog/hosting/master/bootstrap-staging.json";
 	private static final String CLIENT_BOOTSTRAP_STABLE_URL = "https://raw.githubusercontent.com/9InchHog/hosting/master/bootstrap-stable.json";
 	private static final String CLIENT_BOOTSTRAP_NIGHTLY_URL = "https://raw.githubusercontent.com/9InchHog/hosting/master/bootstrap-nightly.json";
 	static final String USER_AGENT = "OpenOSRS/" + LauncherProperties.getVersion();
 	private static final boolean enforceDependencyHashing = true;
 	private static boolean nightly = false;
-	private static boolean staging = false;
 	private static boolean stable = true;
 
 	static final String CLIENT_MAIN_CLASS = "net.runelite.client.RuneLite";
@@ -106,7 +104,6 @@ public class Launcher
 		parser.accepts("forcejvm");
 		parser.accepts("debug");
 		parser.accepts("nightly");
-		parser.accepts("staging");
 		parser.accepts("stable");
 
 		HardwareAccelerationMode defaultMode;
@@ -152,8 +149,8 @@ public class Launcher
 			}
 		}
 
+		stable |= options.has("stable");
 		nightly |= options.has("nightly");
-		staging = options.has("staging");
 
 		LOGS_DIR.mkdirs();
 
@@ -164,7 +161,7 @@ public class Launcher
 			logger.setLevel(Level.DEBUG);
 		}
 
-		if (!nightly && !staging && !stable)
+		if (!nightly && !stable)
 		{
 			OpenOSRSSplashScreen.init(null);
 			OpenOSRSSplashScreen.barMessage(null);
@@ -200,7 +197,7 @@ public class Launcher
 	{
 		try
 		{
-			OpenOSRSSplashScreen.init(nightly ? "Nightly" : stable ? "Stable" : "Staging");
+			OpenOSRSSplashScreen.init(nightly ? "Nightly" : stable ? "Stable" : "Unknown");
 			OpenOSRSSplashScreen.stage(0, "Setting up environment");
 
 			log.info("OpenOSRS Launcher version {}", LauncherProperties.getVersion());
@@ -406,9 +403,9 @@ public class Launcher
 	private static Bootstrap getBootstrap() throws IOException
 	{
 		URL u;
-		if (staging)
+		if (nightly)
 		{
-			u = new URL(CLIENT_BOOTSTRAP_STAGING_URL);
+			u = new URL(CLIENT_BOOTSTRAP_NIGHTLY_URL);
 		}
 		else if (stable)
 		{

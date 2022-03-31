@@ -1,5 +1,5 @@
 /*
-version = '2.2.3'
+version = '2.2.4'
 */
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import org.apache.tools.ant.filters.ReplaceTokens
@@ -9,21 +9,21 @@ buildscript {
         gradlePluginPortal()
     }
     dependencies {
-        classpath("com.github.ben-manes:gradle-versions-plugin:0.28.0")
+        classpath("com.github.ben-manes:gradle-versions-plugin:0.42.0")
     }
 }
 
 plugins {
-    id("com.github.johnrengelman.shadow") version "6.0.0"
-    id("com.github.ben-manes.versions") version "0.28.0"
-    id("se.patrikerdes.use-latest-versions") version "0.2.14"
+    id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("com.github.ben-manes.versions") version "0.42.0"
+    id("se.patrikerdes.use-latest-versions") version "0.2.18"
 
     java
     checkstyle
 }
 
 group = "com.openosrs"
-version = "2.2.3"
+version = "2.2.4"
 description = "OpenOSRS Launcher"
 
 repositories {
@@ -38,16 +38,16 @@ repositories {
 }
 
 dependencies {
-    annotationProcessor(group = "org.projectlombok", name = "lombok", version = "1.18.12")
+    annotationProcessor(group = "org.projectlombok", name = "lombok", version = "1.18.22")
 
 
-    compileOnly(group = "org.projectlombok", name = "lombok", version = "1.18.12")
+    compileOnly(group = "org.projectlombok", name = "lombok", version = "1.18.22")
 
-    implementation(group = "org.slf4j", name = "slf4j-api", version = "1.7.30")
-    implementation(group = "ch.qos.logback", name = "logback-classic", version = "1.2.3")
+    implementation(group = "org.slf4j", name = "slf4j-api", version = "1.7.36")
+    implementation(group = "ch.qos.logback", name = "logback-classic", version = "1.2.11")
     implementation(group = "net.sf.jopt-simple", name = "jopt-simple", version = "5.0.4")
-    implementation(group = "com.google.code.gson", name = "gson", version = "2.8.6")
-    implementation(group = "com.google.guava", name = "guava", version = "29.0-jre")
+    implementation(group = "com.google.code.gson", name = "gson", version = "2.8.9")
+    implementation(group = "com.google.guava", name = "guava", version = "31.1-jre")
     implementation(group = "com.vdurmont", name = "semver4j", version = "3.1.0")
 
     testImplementation(group = "junit", name = "junit", version = "4.13")
