@@ -1,5 +1,5 @@
 /*
-version = '2.2.4'
+version = '2.2.5'
 */
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import org.apache.tools.ant.filters.ReplaceTokens
@@ -23,7 +23,7 @@ plugins {
 }
 
 group = "com.openosrs"
-version = "2.2.4"
+version = "2.2.5"
 description = "OpenOSRS Launcher"
 
 repositories {

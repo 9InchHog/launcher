@@ -68,7 +68,7 @@ import org.slf4j.LoggerFactory;
 @Slf4j
 public class Launcher
 {
-	private static final File RUNELITE_DIR = new File(System.getProperty("user.home"), ".runelite");
+	private static final File RUNELITE_DIR = new File(System.getProperty("user.home"), ".openosrs");
 	private static final File LOGS_DIR = new File(RUNELITE_DIR, "logs");
 	private static final File REPO_DIR = new File(RUNELITE_DIR, "spoon-repo");
 	private static final File CRASH_FILES = new File(LOGS_DIR, "jvm_crash_pid_%p.log");
@@ -79,6 +79,7 @@ public class Launcher
 	private static final boolean enforceDependencyHashing = true;
 	private static boolean nightly = false;
 	private static boolean stable = true;
+	private static final File EXTERNALS_DIR = new File(RUNELITE_DIR, "spoonexternals");
 
 	static final String CLIENT_MAIN_CLASS = "net.runelite.client.RuneLite";
 
@@ -88,7 +89,7 @@ public class Launcher
 
 		try
 		{
-			prop.load(new FileInputStream(new File(RUNELITE_DIR, "runeliteplus.properties")));
+			prop.load(new FileInputStream(new File(RUNELITE_DIR, "settings.properties")));
 		}
 		catch (IOException ignored)
 		{
@@ -308,9 +309,17 @@ public class Launcher
 				return;
 			}
 
-			List<File> results = Arrays.stream(bootstrap.getArtifacts())
-				.map(dep -> new File(REPO_DIR, dep.getName()))
-				.collect(Collectors.toList());
+			List<File> results = new ArrayList<>();
+
+			File[] externals = EXTERNALS_DIR.listFiles();
+			if (externals != null)
+			{
+				results.addAll(Arrays.asList(externals));
+			}
+
+			results.addAll(Arrays.stream(bootstrap.getArtifacts())
+					.map(dep -> new File(REPO_DIR, dep.getName()))
+					.collect(Collectors.toList()));
 
 			OpenOSRSSplashScreen.stage(.80, "Verifying");
 			try
