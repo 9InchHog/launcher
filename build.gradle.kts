@@ -1,7 +1,6 @@
 /*
-version = '2.2.5'
+version = '3.0.0'
 */
-import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import org.apache.tools.ant.filters.ReplaceTokens
 
 buildscript {
@@ -9,21 +8,19 @@ buildscript {
         gradlePluginPortal()
     }
     dependencies {
-        classpath("com.github.ben-manes:gradle-versions-plugin:0.42.0")
+        classpath("com.github.ben-manes:gradle-versions-plugin:0.28.0")
     }
 }
 
 plugins {
-    id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("com.github.ben-manes.versions") version "0.42.0"
-    id("se.patrikerdes.use-latest-versions") version "0.2.18"
+    id("com.github.johnrengelman.shadow") version "6.0.0"
 
     java
     checkstyle
 }
 
 group = "com.openosrs"
-version = "2.2.5"
+version = "3.0.0"
 description = "OpenOSRS Launcher"
 
 repositories {
@@ -38,19 +35,25 @@ repositories {
 }
 
 dependencies {
-    annotationProcessor(group = "org.projectlombok", name = "lombok", version = "1.18.22")
+    annotationProcessor(group = "org.projectlombok", name = "lombok", version = "1.18.20")
 
+    compileOnly(group = "javax.annotation", name = "javax.annotation-api", version = "1.3.2")
+    compileOnly(group = "org.projectlombok", name = "lombok", version = "1.18.20")
 
-    compileOnly(group = "org.projectlombok", name = "lombok", version = "1.18.22")
-
-    implementation(group = "org.slf4j", name = "slf4j-api", version = "1.7.36")
-    implementation(group = "ch.qos.logback", name = "logback-classic", version = "1.2.11")
-    implementation(group = "net.sf.jopt-simple", name = "jopt-simple", version = "5.0.4")
-    implementation(group = "com.google.code.gson", name = "gson", version = "2.8.9")
-    implementation(group = "com.google.guava", name = "guava", version = "31.1-jre")
+    implementation(group = "org.slf4j", name = "slf4j-api", version = "1.7.25")
+    implementation(group = "ch.qos.logback", name = "logback-classic", version = "1.2.9")
+    implementation(group = "net.sf.jopt-simple", name = "jopt-simple", version = "5.0.1")
+    implementation(group = "com.google.code.gson", name = "gson", version = "2.8.5")
+    implementation(group = "com.google.code.findbugs", name = "jsr305", version = "3.0.2")
+    implementation(group = "com.google.guava", name = "guava", version = "23.2-jre") {
+        exclude(group = "com.google.code.findbugs", module = "jsr305")
+        exclude(group = "com.google.errorprone", module = "error_prone_annotations")
+        exclude(group = "com.google.j2objc", module = "j2objc-annotations")
+        exclude(group = "org.codehaus.mojo", module = "animal-sniffer-annotations")
+    }
     implementation(group = "com.vdurmont", name = "semver4j", version = "3.1.0")
 
-    testImplementation(group = "junit", name = "junit", version = "4.13")
+    testImplementation(group = "junit", name = "junit", version = "4.12")
 }
 
 configure<CheckstyleExtension> {
@@ -58,12 +61,6 @@ configure<CheckstyleExtension> {
     toolVersion = "8.25"
     isShowViolations = true
     isIgnoreFailures = false
-}
-
-fun isNonStable(version: String): Boolean {
-    return listOf("ALPHA", "BETA", "RC").any {
-        version.toUpperCase().contains(it)
-    }
 }
 
 tasks {
@@ -83,31 +80,31 @@ tasks {
     processResources {
         val tokens = mapOf(
                 "basedir"         to project.projectDir.path,
-                "finalName"       to "SpoonLite",
+                "finalName"       to "OpenOSRS",
                 "artifact"        to "launcher",
                 "project.version" to project.version,
                 "project.group"   to project.group,
-                "description"     to "SpoonLite launcher"
+                "description"     to "OpenOSRS launcher"
         )
 
-        copy {
-            from("${rootDir}/packr") {
-                include("Info.plist")
-            }
-            from("${rootDir}/innosetup") {
-                include("openosrs.iss")
-                include("openosrs32.iss")
-            }
-            from("${rootDir}/appimage") {
-                include("SpoonLite.desktop")
-            }
-            into("${buildDir}/filtered-resources/")
-
-            filter(ReplaceTokens::class, "tokens" to tokens)
-            filteringCharset = "UTF-8"
-        }
-
         doLast {
+            copy {
+                from("${rootDir}/packr") {
+                    include("Info.plist")
+                }
+                from("${rootDir}/innosetup") {
+                    include("openosrs.iss")
+                    include("openosrs32.iss")
+                }
+                from("${rootDir}/appimage") {
+                    include("openosrs.desktop")
+                }
+                into("${buildDir}/filtered-resources/")
+
+                filter(ReplaceTokens::class, "tokens" to tokens)
+                filteringCharset = "UTF-8"
+            }
+
             copy {
                 from("src/main/resources") {
                     include("launcher.properties")
@@ -127,21 +124,7 @@ tasks {
     }
 
     shadowJar {
-        archiveName = "SpoonLite-shaded.jar"
+        archiveName = "OpenOSRS-shaded.jar"
         exclude("net/runelite/injector/**")
-    }
-
-    named<DependencyUpdatesTask>("dependencyUpdates") {
-        checkForGradleUpdate = false
-
-        resolutionStrategy {
-            componentSelection {
-                all {
-                    if (candidate.displayName.contains("fernflower") || isNonStable(candidate.version)) {
-                        reject("Non stable")
-                    }
-                }
-            }
-        }
     }
 }

@@ -1,17 +1,16 @@
 {
   "platform": "windows32",
   "jdk": "win32-jdk",
-  "executable": "SpoonLite",
+  "executable": "OpenOSRS",
   "classpath": [
-    "build/libs/SpoonLite-shaded.jar"
+    "build/libs/OpenOSRS-shaded.jar"
   ],
   "mainclass": "net.runelite.launcher.Launcher",
   "vmargs": [
     "-Drunelite.launcher.nojvm=true",
     "-Xmx512m",
     "-Xss2m",
-    "-XX:CompileThreshold=1500",
-    "-Djna.nosys=true"
+    "-XX:CompileThreshold=1500"
   ],
   "output": "native-win32"
 }

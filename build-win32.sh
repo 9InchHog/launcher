@@ -30,47 +30,23 @@ fi
 echo "f200fb7088dbb5e61e0835fe7b0d7fc1310beda192dacd764927567dcd7c4f0f  packr_${PACKR_VERSION}.jar" | sha256sum -c
 
 java -jar packr_${PACKR_VERSION}.jar \
-    --platform \
-    windows32 \
-    --jdk \
-    win32-jdk \
-    --executable \
-    SpoonLite \
-    --classpath \
-    build/libs/SpoonLite-shaded.jar \
-    --mainclass \
-    net.runelite.launcher.Launcher \
-    --vmargs \
-    Drunelite.launcher.nojvm=true \
-    Xmx512m \
-    Xss2m \
-    XX:CompileThreshold=1500 \
-    Djna.nosys=true \
-    --output \
-    native-win32
+    packr/win-x86-config.json
 
 # modify packr exe manifest to enable Windows dpi scaling
-"C:\Program Files (x86)\Resource Hacker\ResourceHacker.exe" \
-    -open native-win32/SpoonLite.exe \
-    -save native-win32/SpoonLite.exe \
+resourcehacker \
+    -open native-win32/OpenOSRS.exe \
+    -save native-win32/OpenOSRS.exe \
     -action addoverwrite \
     -res packr/openosrs.manifest \
     -mask MANIFEST,1,
 
 # packr on Windows doesn't support icons, so we use resourcehacker to include it
-"C:\Program Files (x86)\Resource Hacker\ResourceHacker.exe" \
-    -open native-win32/SpoonLite.exe \
-    -save native-win32/SpoonLite.exe \
+resourcehacker \
+    -open native-win32/OpenOSRS.exe \
+    -save native-win32/OpenOSRS.exe \
     -action add \
-    -res runelite.ico \
+    -res openosrs.ico \
     -mask ICONGROUP,MAINICON,
 
-if ! [ -f vcredist_x86.exe ] ; then
-    # Visual C++ Redistributable Packages for Visual Studio 2013
-    curl -Lo vcredist_x86.exe https://download.microsoft.com/download/2/E/6/2E61CFA4-993B-4DD4-91DA-3737CD5CD6E3/vcredist_x86.exe
-fi
-
-echo "a22895e55b26202eae166838edbe2ea6aad00d7ea600c11f8a31ede5cbce2048 *vcredist_x86.exe" | sha256sum -c
-
 # We use the filtered iss file
-"C:\Program Files (x86)\Inno Setup 6\ISCC.exe" build/filtered-resources/openosrs32.iss
+iscc build/filtered-resources/openosrs32.iss

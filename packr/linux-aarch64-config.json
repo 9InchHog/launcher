@@ -1,6 +1,6 @@
 {
-    "platform": "linux64",
-    "jdk": "linux-jdk",
+    "platform": "linuxaarch64",
+    "jdk": "linux-aarch64-jdk",
     "executable": "OpenOSRS",
     "classpath": [
         "build/libs/OpenOSRS-shaded.jar"
@@ -12,7 +12,7 @@
        "-Xss2m",
        "-XX:CompileThreshold=1500"
     ],
-    "output": "native-linux-x86_64/OpenOSRS.AppDir/",
+    "output": "native-linux/OpenOSRS.AppDir/",
     "resources": [
       "build/filtered-resources/openosrs.desktop",
       "appimage/openosrs.png"

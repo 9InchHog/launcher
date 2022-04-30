@@ -7,12 +7,7 @@ JDK_BUILD="10"
 PACKR_VERSION="runelite-1.3"
 APPIMAGE_VERSION="12"
 
-# Check if there's a client jar file - If there's no file the AppImage will not work but will still be built.
-if ! [ -e build/libs/SpoonLite-shaded.jar ]
-then
-  echo "build/libs/SpoonLite-shaded.jar not found, exiting"
-  exit 1
-fi
+umask 022
 
 if ! [ -f OpenJDK11U-jre_x64_linux_hotspot_${JDK_VER}_${JDK_BUILD}.tar.gz ] ; then
     curl -Lo OpenJDK11U-jre_x64_linux_hotspot_${JDK_VER}_${JDK_BUILD}.tar.gz \
@@ -36,42 +31,33 @@ fi
 
 echo "f200fb7088dbb5e61e0835fe7b0d7fc1310beda192dacd764927567dcd7c4f0f  packr_${PACKR_VERSION}.jar" | sha256sum -c
 
-java -jar packr_${PACKR_VERSION}.jar \
-    --platform \
-    linux64 \
-    --jdk \
-    linux-jdk \
-    --executable \
-    SpoonLite \
-    --classpath \
-    build/libs/SpoonLite-shaded.jar \
-    --mainclass \
-    net.runelite.launcher.Launcher \
-    --vmargs \
-    Drunelite.launcher.nojvm=true \
-    Xmx512m \
-    Xss2m \
-    XX:CompileThreshold=1500 \
-    Djna.nosys=true \
-    --output \
-    native-linux/SpoonLite.AppDir/ \
-    --resources \
-    build/filtered-resources/SpoonLite.desktop \
-    appimage/runelite.png
+# Note: Host umask may have checked out this directory with g/o permissions blank
+chmod -R u=rwX,go=rX appimage
+# ...ditto for the build process
+chmod 644 build/libs/OpenOSRS-shaded.jar
 
-pushd native-linux/SpoonLite.AppDir
+java -jar packr_${PACKR_VERSION}.jar \
+    packr/linux-x64-config.json
+
+pushd native-linux-x86_64/OpenOSRS.AppDir
 mkdir -p jre/lib/amd64/server/
 ln -s ../../server/libjvm.so jre/lib/amd64/server/ # packr looks for libjvm at this hardcoded path
+
+# Symlink AppRun -> OpenOSRS
+ln -s OpenOSRS AppRun
+
+# Ensure OpenOSRS is executable to all users
+chmod 755 OpenOSRS
 popd
 
-# Symlink AppRun -> RuneLite
-pushd native-linux/SpoonLite.AppDir/
-ln -s SpoonLite AppRun
-popd
+if ! [ -f appimagetool-x86_64.AppImage ] ; then
+    curl -Lo appimagetool-x86_64.AppImage \
+        https://github.com/AppImage/AppImageKit/releases/download/$APPIMAGE_VERSION/appimagetool-x86_64.AppImage
+    chmod +x appimagetool-x86_64.AppImage
+fi
 
-curl -Lo appimagetool-x86_64.AppImage https://github.com/AppImage/AppImageKit/releases/download/12/appimagetool-x86_64.AppImage
-chmod 755 appimagetool-x86_64.AppImage
+echo "d918b4df547b388ef253f3c9e7f6529ca81a885395c31f619d9aaf7030499a13  appimagetool-x86_64.AppImage" | sha256sum -c
 
 ./appimagetool-x86_64.AppImage \
-	native-linux/SpoonLite.AppDir/ \
-	release/SpoonLite.AppImage
+	native-linux-x86_64/OpenOSRS.AppDir/ \
+	native-linux-x86_64/OpenOSRS.AppImage
