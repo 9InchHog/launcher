@@ -1,10 +1,10 @@
 {
     "platform": "mac64",
-    "icon": "packr/openosrs.icns",
+    "icon": "packr/runelite.icns",
     "jdk": "osx-jdk",
-    "executable": "OpenOSRS",
+    "executable": "SpoonLite",
     "classpath": [
-        "build/libs/OpenOSRS-shaded.jar"
+        "build/libs/SpoonLite-shaded.jar"
     ],
     "mainclass": "net.runelite.launcher.Launcher",
     "vmargs": [
@@ -13,5 +13,5 @@
        "-Xss2m",
        "-XX:CompileThreshold=1500"
     ],
-    "output": "native-osx/OpenOSRS.app"
+    "output": "native-osx/SpoonLite.app"
 }

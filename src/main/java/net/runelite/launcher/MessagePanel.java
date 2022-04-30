@@ -87,7 +87,12 @@ class MessagePanel extends JPanel
 		c.gridy++;
 
 		// alternate message action
-		messageArea = messageArea("Open-source client for Old School RuneScape with more functionality and fewer restrictions.");
+		messageArea = messageArea("Holy fucking shit. I want to grill so goddamn bad. I can't stand it anymore. Every time I go to my yard I get a massive spatula. " +
+				"I've seen every charcoal review post there is online. My dreams are nothing but constant fucking grilling with My grill. " +
+				"I'm sick of waking up every morning with six hotdogs in my boxers and knowing that those are hotdogs that should've been grilled inside of my grill. " +
+				"I want it to have burgers/hotdogs. Fuck, my fucking mom caught me with the neighbors grill. " +
+				"I'd used my own propane and went to fucking town. She hasn't said a word to me in 10 hours and I'm worried she's gonna take away my grill. " +
+				"I might not ever get to see my grill again.");
 
 		scrollPane = new JScrollPane(messageArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
@@ -102,7 +107,8 @@ class MessagePanel extends JPanel
 		this.add(scrollPane, c);
 		c.gridy++;
 
-		bootstrapChannel = messageArea("Do you want to make use of the stable or the nightly update channel?");
+		//bootstrapChannel = messageArea("Do you want to make use of the stable or the nightly update channel?");
+		bootstrapChannel = messageArea("Do you want to use .openosrs or .runelite settings?");
 
 		this.add(bootstrapChannel, c);
 		c.gridy++;
@@ -113,10 +119,12 @@ class MessagePanel extends JPanel
 		buttonPanel.setBackground(ColorScheme.DARKER_GRAY_COLOR);
 		buttonPanel.setOpaque(true);
 
-		stableBtn = addButton("Stable", "The Stable option isn't the most up-to-date build, it will use the most stable SpoonLite build.");
+		//stableBtn = addButton("Stable", "The Stable option isn't the most up-to-date build, it will use the most stable OpenOSRS build.");
+		stableBtn = addButton(".openosrs", "Uses the settings.properties from the .openosrs folder.");
 		buttonPanel.add(stableBtn);
 
-		nightlyBtn = addButton("Nightly", "The Nightly option is the most up-to-date build, it will use the latest SpoonLite build which is built each night.");
+		//nightlyBtn = addButton("Nightly", "The Nightly option is the most up-to-date build, it will use the latest OpenOSRS build which is built each night.");
+		nightlyBtn = addButton(".runelite", "Uses the settings.properties from the .runelite folder.");
 		buttonPanel.add(nightlyBtn);
 
 		bootstrapChannel.setVisible(false);
@@ -161,12 +169,7 @@ class MessagePanel extends JPanel
 
 	private JLabel messageArea(String message)
 	{
-		JLabel messageArea = new JLabel("<html><div style='text-align:center;'>Holy fucking shit. I want to grill so goddamn bad. I can't stand it anymore. Every time I go to my yard I get a massive spatula." +
-				" I've seen every charcoal review post there is online. My dreams are nothing but constant fucking grilling with My grill. " +
-				"I'm sick of waking up every morning with six hotdogs in my boxers and knowing that those are hotdogs that should've been grilled inside of my grill. " +
-				"I want it to have burgers/hotdogs.\n" + "\n" + "Fuck, my fucking mom caught me with the neighbors grill. " +
-				"I'd used my own propane and went to fucking town. She hasn't said a word to me in 10 hours and I'm worried she's gonna take away my grill. " +
-				"I might not ever get to see my grill again..</div></html>")
+		JLabel messageArea = new JLabel("<html><div style='text-align:center;'>" + message + "</div></html>")
 		{
 			@Override
 			public Dimension getPreferredSize()

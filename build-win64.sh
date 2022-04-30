@@ -34,8 +34,8 @@ java -jar packr_${PACKR_VERSION}.jar \
 
 # modify packr exe manifest to enable Windows dpi scaling
 resourcehacker \
-    -open native-win64/OpenOSRS.exe \
-    -save native-win64/OpenOSRS.exe \
+    -open native-win64/SpoonLite.exe \
+    -save native-win64/SpoonLite.exe \
     -action addoverwrite \
     -res packr/openosrs.manifest \
     -mask MANIFEST,1,
@@ -43,10 +43,10 @@ resourcehacker \
 # packr on Windows doesn't support icons, so we use resourcehacker to include it
 
 resourcehacker \
-    -open native-win64/OpenOSRS.exe \
-    -save native-win64/OpenOSRS.exe \
+    -open native-win64/SpoonLite.exe \
+    -save native-win64/SpoonLite.exe \
     -action add \
-    -res openosrs.ico \
+    -res runelite.ico \
     -mask ICONGROUP,MAINICON,
 
 # We use the filtered iss file

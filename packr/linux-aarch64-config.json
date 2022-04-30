@@ -1,9 +1,9 @@
 {
     "platform": "linuxaarch64",
     "jdk": "linux-aarch64-jdk",
-    "executable": "OpenOSRS",
+    "executable": "SpoonLite",
     "classpath": [
-        "build/libs/OpenOSRS-shaded.jar"
+        "build/libs/SpoonLite-shaded.jar"
     ],
     "mainclass": "net.runelite.launcher.Launcher",
     "vmargs": [
@@ -12,9 +12,9 @@
        "-Xss2m",
        "-XX:CompileThreshold=1500"
     ],
-    "output": "native-linux/OpenOSRS.AppDir/",
+    "output": "native-linux/SpoonLite.AppDir/",
     "resources": [
-      "build/filtered-resources/openosrs.desktop",
-      "appimage/openosrs.png"
+      "build/filtered-resources/SpoonLite.desktop",
+      "appimage/runelite.png"
     ]
 }

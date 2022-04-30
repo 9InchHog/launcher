@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=SpoonLite
+Comment=Open-source OldSchool RuneScape client with more functionality and less restrictions
+Exec=SpoonLite
+Icon=${SNAP}/meta/gui/runelite.png
+Type=Application
+Categories=Game;
+StartupNotify=false
+Keywords=rs;osrs;old;school;runescape

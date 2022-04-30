@@ -80,11 +80,11 @@ tasks {
     processResources {
         val tokens = mapOf(
                 "basedir"         to project.projectDir.path,
-                "finalName"       to "OpenOSRS",
+                "finalName"       to "SpoonLite",
                 "artifact"        to "launcher",
                 "project.version" to project.version,
                 "project.group"   to project.group,
-                "description"     to "OpenOSRS launcher"
+                "description"     to "SpoonLite launcher"
         )
 
         doLast {
@@ -124,7 +124,7 @@ tasks {
     }
 
     shadowJar {
-        archiveName = "OpenOSRS-shaded.jar"
+        archiveName = "SpoonLite-shaded.jar"
         exclude("net/runelite/injector/**")
     }
 }

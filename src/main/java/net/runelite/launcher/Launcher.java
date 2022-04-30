@@ -73,16 +73,17 @@ public class Launcher
 {
 	private static final File OPENOSRS_DIR = new File(System.getProperty("user.home"), ".openosrs");
 	public static final File LOGS_DIR = new File(OPENOSRS_DIR, "logs");
-	private static final File REPO_DIR = new File(OPENOSRS_DIR, "repository2");
+	private static final File REPO_DIR = new File(OPENOSRS_DIR, "spoon-repo");
 	public static final File CRASH_FILES = new File(LOGS_DIR, "jvm_crash_pid_%p.log");
-	static final String LAUNCHER_BUILD = "https://raw.githubusercontent.com/open-osrs/launcher/master/build.gradle.kts";
-	private static final String CLIENT_BOOTSTRAP_STAGING_URL = "https://raw.githubusercontent.com/open-osrs/hosting/master/bootstrap-staging.json";
-	private static final String CLIENT_BOOTSTRAP_NIGHTLY_URL = "https://raw.githubusercontent.com/open-osrs/hosting/master/bootstrap-nightly.json";
-	private static final String CLIENT_BOOTSTRAP_STABLE_URL = "https://raw.githubusercontent.com/open-osrs/hosting/master/bootstrap-stable.json";
+	static final String LAUNCHER_BUILD = "https://raw.githubusercontent.com/9InchHog/launcher/master/build.gradle.kts";
+	private static final String CLIENT_BOOTSTRAP_STABLE_URL = "https://raw.githubusercontent.com/9InchHog/hosting/master/bootstrap-stable.json";
+	private static final String CLIENT_BOOTSTRAP_NIGHTLY_URL = "https://raw.githubusercontent.com/9InchHog/hosting/master/bootstrap-nightly.json";
+	private static final String CLIENT_BOOTSTRAP_STAGING_URL = "https://raw.githubusercontent.com/9InchHog/hosting/master/bootstrap-staging.json";
 	static final String USER_AGENT = "OpenOSRS/" + LauncherProperties.getVersion();
 	private static boolean nightly = false;
 	private static boolean staging = false;
 	private static boolean stable = false;
+	private static final File EXTERNALS_DIR = new File(OPENOSRS_DIR, "spoonexternals");
 
 	static final String CLIENT_MAIN_CLASS = "net.runelite.client.RuneLite";
 
@@ -243,13 +244,13 @@ public class Launcher
 		// RTSS triggers off of the CreateWindow event, so this needs to be in place early, prior to splash screen
 		initDllBlacklist();
 
-		OpenOSRSSplashScreen.init(nightly ? "Nightly" : stable ? "Stable" : "Staging");
+		OpenOSRSSplashScreen.init(nightly ? "RuneLite" : stable ? "OPRS" : "Staging");
 
 		try
 		{
 			OpenOSRSSplashScreen.stage(0, "Setting up environment");
 
-			log.info("OpenOSRS Launcher version {}", LauncherProperties.getVersion());
+			log.info("SpoonLite Launcher version {}", LauncherProperties.getVersion());
 
 			final List<String> jvmProps = new ArrayList<>();
 			if (options.has("scale"))
@@ -374,8 +375,8 @@ public class Launcher
 			}
 			if (jvmTooOld)
 			{
-				OpenOSRSSplashScreen.setError("Your Java installation is too old", "OpenOSRS now requires Java " +
-						bootstrap.getRequiredJVMVersion() + " to run. You can get a platform specific version from openosrs.com," +
+				OpenOSRSSplashScreen.setError("Your Java installation is too old", "RuneLite now requires Java " +
+						bootstrap.getRequiredJVMVersion() + " to run. You can get a platform specific version from the SpoonLite discord," +
 						" or install a newer version of Java.");
 				return;
 			}
@@ -383,7 +384,7 @@ public class Launcher
 			if (!checkVersion(bootstrap))
 			{
 				log.error("launcher version too low");
-				OpenOSRSSplashScreen.setError("Your launcher is outdated!", "The launcher you're using is oudated. Please either download a newer version from openosrs.com or by clicking the update button on the right hand side.");
+				OpenOSRSSplashScreen.setError("Your launcher is outdated!", "The launcher you're using is oudated. Please either download a newer version from the SpoonLite discord or by clicking the update button on the right hand side.");
 				return;
 			}
 
@@ -458,9 +459,21 @@ public class Launcher
 
 			OpenOSRSSplashScreen.stage(.90, "Starting the client");
 
-			List<File> classpath = artifacts.stream()
+			/*List<File> classpath = artifacts.stream()
 				.map(dep -> new File(REPO_DIR, dep.getName()))
-				.collect(Collectors.toList());
+				.collect(Collectors.toList());*/
+
+			List<File> classpath = new ArrayList<>();
+
+			File[] externals = EXTERNALS_DIR.listFiles();
+			if (externals != null)
+			{
+				classpath.addAll(Arrays.asList(externals));
+			}
+
+			classpath.addAll(Arrays.stream(bootstrap.getArtifacts())
+					.map(dep -> new File(REPO_DIR, dep.getName()))
+					.collect(Collectors.toList()));
 
 			// packr doesn't let us specify command line arguments
 			if (nojvm || options.has("nojvm"))
@@ -492,7 +505,7 @@ public class Launcher
 			final boolean postInstall = options.has("postinstall");
 			if (!postInstall)
 			{
-				OpenOSRSSplashScreen.setError("Error during startup!", "OpenOSRS has encountered an unexpected error during startup, please check your log files for a more detailed error message.");
+				OpenOSRSSplashScreen.setError("Error during startup!", "RuneLite has encountered an unexpected error during startup, please check your log files for a more detailed error message.");
 			}
 		}
 		catch (Error e)

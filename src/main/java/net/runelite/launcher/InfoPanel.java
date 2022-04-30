@@ -58,7 +58,6 @@ class InfoPanel extends JPanel
 {
 	private static final Color DARK_GREY = new Color(10, 10, 10, 255);
 
-	//private static final BufferedImage TRANSPARENT_LOGO = ImageUtil.getResourceStreamFromClass(InfoPanel.class, "openosrs.png");
 	private static final BufferedImage TRANSPARENT_LOGO = ImageUtil.getResourceStreamFromClass(InfoPanel.class, "fuckmygrill.png");
 	static final Dimension PANEL_SIZE = new Dimension(200, OpenOSRSSplashScreen.FRAME_SIZE.height);
 
@@ -132,7 +131,7 @@ class InfoPanel extends JPanel
 		this.add(troubleshooting, c);
 		c.gridy++;
 
-		final JLabel exit = createPanelButton("Exit", "Closes the application immediately!", () -> System.exit(0));
+		final JLabel exit = createPanelButton("Exit", "Closes the application immediately", () -> System.exit(0));
 		this.add(exit, c);
 		c.gridy++;
 	}

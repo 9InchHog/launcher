@@ -69,7 +69,7 @@ class ReflectionLauncher
 				}
 			}
 		};
-		thread.setName("OpenOSRS");
+		thread.setName("RuneLite");
 		thread.start();
 
 		OpenOSRSSplashScreen.close();
