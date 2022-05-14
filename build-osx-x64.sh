@@ -40,27 +40,27 @@ echo "f51577b005a51331b822a18122ce08fca58cf6fee91f071d5a16354815bbe1e3  packr_${
 java -jar packr_${PACKR_VERSION}.jar \
     packr/macos-x64-config.json
 
-cp build/filtered-resources/Info.plist native-osx/OpenOSRS.app/Contents
+cp build/filtered-resources/Info.plist native-osx/SpoonLite.app/Contents
 
-echo Setting world execute permissions on OpenOSRS
-pushd native-osx/OpenOSRS.app
-chmod g+x,o+x Contents/MacOS/OpenOSRS
+echo Setting world execute permissions on SpoonLite
+pushd native-osx/SpoonLite.app
+chmod g+x,o+x Contents/MacOS/SpoonLite
 popd
 
-codesign -f -s "${SIGNING_IDENTITY}" --entitlements osx/signing.entitlements --options runtime native-osx/OpenOSRS.app || true
+codesign -f -s "${SIGNING_IDENTITY}" --entitlements osx/signing.entitlements --options runtime native-osx/SpoonLite.app || true
 
 # create-dmg exits with an error code due to no code signing, but is still okay
 # note we use Adam-/create-dmg as upstream does not support UDBZ
-create-dmg --format UDBZ native-osx/OpenOSRS.app native-osx/ || true
+create-dmg --format UDBZ native-osx/SpoonLite.app native-osx/ || true
 
-mv native-osx/OpenOSRS\ *.dmg native-osx/OpenOSRS-x64.dmg
+mv native-osx/SpoonLite\ *.dmg native-osx/SpoonLite-x64.dmg
 
-if ! hdiutil imageinfo native-osx/OpenOSRS-x64.dmg | grep -q "Format: UDBZ" ; then
+if ! hdiutil imageinfo native-osx/SpoonLite-x64.dmg | grep -q "Format: UDBZ" ; then
     echo "Format of resulting dmg was not UDBZ, make sure your create-dmg has support for --format"
     exit 1
 fi
 
 # Notarize app
-if xcrun notarytool submit native-osx/OpenOSRS-x64.dmg --wait --keychain-profile "AC_PASSWORD" ; then
-    xcrun stapler staple native-osx/OpenOSRS-x64.dmg
+if xcrun notarytool submit native-osx/SpoonLite-x64.dmg --wait --keychain-profile "AC_PASSWORD" ; then
+    xcrun stapler staple native-osx/SpoonLite-x64.dmg
 fi

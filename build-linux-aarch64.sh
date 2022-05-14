@@ -34,22 +34,22 @@ echo "f200fb7088dbb5e61e0835fe7b0d7fc1310beda192dacd764927567dcd7c4f0f  packr_${
 # Note: Host umask may have checked out this directory with g/o permissions blank
 chmod -R u=rwX,go=rX appimage
 # ...ditto for the build process
-chmod 644 build/libs/OpenOSRS-shaded.jar
+chmod 644 build/libs/SpoonLite-shaded.jar
 
 rm -rf native-linux-aarch64
 
 java -jar packr_${PACKR_VERSION}.jar \
     packr/linux-aarch64-config.json
 
-pushd native-linux-aarch64/OpenOSRS.AppDir
+pushd native-linux-aarch64/SpoonLite.AppDir
 mkdir -p jre/lib/amd64/server/
 ln -s ../../server/libjvm.so jre/lib/amd64/server/ # packr looks for libjvm at this hardcoded path
 
-# Symlink AppRun -> OpenOSRS
-ln -s OpenOSRS AppRun
+# Symlink AppRun -> SpoonLite
+ln -s SpoonLite AppRun
 
 # Ensure OpenOSRS is executable to all users
-chmod 755 OpenOSRS
+chmod 755 SpoonLite
 popd
 
 if ! [ -f appimagetool-x86_64.AppImage ] ; then
@@ -69,5 +69,5 @@ echo "207f8955500cfe8dd5b824ca7514787c023975e083b0269fc14600c380111d85  runtime-
 
 ARCH=arm_aarch64 ./appimagetool-x86_64.AppImage \
 	--runtime-file runtime-aarch64  \
-	native-linux-aarch64/OpenOSRS.AppDir/ \
-	native-linux-aarch64/OpenOSRS-aarch64.AppImage
+	native-linux-aarch64/SpoonLite.AppDir/ \
+	native-linux-aarch64/SpoonLite-aarch64.AppImage

@@ -47,21 +47,21 @@ echo "f51577b005a51331b822a18122ce08fca58cf6fee91f071d5a16354815bbe1e3  packr_${
 java -jar packr_${PACKR_VERSION}.jar \
 	packr/macos-aarch64-config.json
 
-cp build/filtered-resources/Info.plist native-osx-aarch64/OpenOSRS.app/Contents
+cp build/filtered-resources/Info.plist native-osx-aarch64/SpoonLite.app/Contents
 
-echo Setting world execute permissions on OpenOSRS
-pushd native-osx-aarch64/OpenOSRS.app
-chmod g+x,o+x Contents/MacOS/OpenOSRS
+echo Setting world execute permissions on SpoonLite
+pushd native-osx-aarch64/SpoonLite.app
+chmod g+x,o+x Contents/MacOS/SpoonLite
 popd
 
-codesign -f -s "${SIGNING_IDENTITY}" --entitlements osx/signing.entitlements --options runtime native-osx-aarch64/OpenOSRS.app || true
+codesign -f -s "${SIGNING_IDENTITY}" --entitlements osx/signing.entitlements --options runtime native-osx-aarch64/SpoonLite.app || true
 
 # create-dmg exits with an error code due to no code signing, but is still okay
-create-dmg native-osx-aarch64/OpenOSRS.app native-osx-aarch64/ || true
+create-dmg native-osx-aarch64/SpoonLite.app native-osx-aarch64/ || true
 
-mv native-osx-aarch64/OpenOSRS\ *.dmg native-osx-aarch64/OpenOSRS-aarch64.dmg
+mv native-osx-aarch64/SpoonLite\ *.dmg native-osx-aarch64/SpoonLite-aarch64.dmg
 
 # Notarize app
-if xcrun notarytool submit native-osx-aarch64/OpenOSRS-aarch64.dmg --wait --keychain-profile "AC_PASSWORD" ; then
-    xcrun stapler staple native-osx-aarch64/OpenOSRS-aarch64.dmg
+if xcrun notarytool submit native-osx-aarch64/SpoonLite-aarch64.dmg --wait --keychain-profile "AC_PASSWORD" ; then
+    xcrun stapler staple native-osx-aarch64/SpoonLite-aarch64.dmg
 fi
